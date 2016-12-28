@@ -15,13 +15,42 @@ if (!is_null($events['events'])) {
 		if ($event['type'] == 'message' && $event['message']['type'] == 'text') {
 			// Get text sent
 			$text = $event['message']['text'];
+			
+			$replyText = "";
+			
+			switch ($text) {
+				case 'ฟ้า' :
+					$replyText = "วันศุกร์";
+				break;
+				case 'เหลือง' :
+					$replyText = "วันจันทร์";
+				break;
+				case 'ชมพู' :
+					$replyText = "วันอังคาร";
+				break;
+				case 'เขียว' :
+					$replyText = "วันพุธ";
+				break;
+				case 'ส้ม' :
+					$replyText = "วันพฤหัส";
+				break;
+				case 'ม่วง' :
+					$replyText = "วันเสาร์";
+				break;
+				case 'แดง' :
+					$replyText = "วันอาทิตย์";
+				break;
+				default:
+					$replyText = $text;
+			}
+			
 			// Get replyToken
 			$replyToken = $event['replyToken'];
 
 			// Build message to reply back
 			$messages = [
 				'type' => 'text',
-				'text' => $text
+				'text' => $replyText
 			];
 
 			// Make a POST Request to Messaging API to reply to sender
